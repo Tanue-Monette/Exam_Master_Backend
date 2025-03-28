@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Database connection
 const connectDB = async () => {
     try {
         await mongoose.connect("mongodb+srv://tanuemonet895:EMrQjC5vtgo0cf4F@backend.h4ulp.mongodb.net/examMaster?retryWrites=true&w=majority&appName=Backend");
@@ -11,5 +10,4 @@ const connectDB = async () => {
     }
 };
 
-// Export the connection
 module.exports = connectDB;

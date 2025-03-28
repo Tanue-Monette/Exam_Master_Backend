@@ -9,8 +9,38 @@ const getAllQuestions = async () => {
     return await Question.find().populate("askedBy", "username email");
 };
 
-const getQuestionById = async (questionId) => {
-    return await Question.findById(questionId).populate("askedBy", "username email");
+const getQuestionWithAnswers = async (questionId) => {
+ const question = await Question.findById(questionId)
+     .populate('askedBy', 'username')
+     .populate({
+       path: 'answers',
+       populate: [
+         {
+           path: 'answeredBy',
+           select: 'username'
+         },
+         {
+           path: 'comments',
+           populate: {
+             path: 'user',
+             select: 'name'
+           }
+         },
+         {
+           path: 'likes',
+           populate: {
+             path: 'user',
+             select: 'name'
+           }
+         }
+       ]
+     });
+
+   if (!question) {
+     throw new Error('Question not found');
+   }
+
+   return question;
 };
 
 const updateQuestion = async (questionId, updateData) => {
@@ -24,7 +54,7 @@ const deleteQuestion = async (questionId) => {
 module.exports = {
     createQuestion,
     getAllQuestions,
-    getQuestionById,
+    getQuestionWithAnswers,
     updateQuestion,
     deleteQuestion,
 };

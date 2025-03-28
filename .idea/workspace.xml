@@ -4,11 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="132c3cbd-7b71-430c-b14d-a5c551a91986" name="Changes" comment="" />
+    <list default="true" id="132c3cbd-7b71-430c-b14d-a5c551a91986" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/controllers/answer.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/Answer.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/answer.route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seeders/answer.seeder.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/answer.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -21,6 +33,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.sohocn.deep.seek.coder.settings.DeepSeekSettingsConfigurable&quot;
   }

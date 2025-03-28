@@ -23,19 +23,14 @@ const getAllQuestions = async (req, res) => {
     }
 };
 
-const getQuestion = async (req, res) => {
-    try {
-        const questionId = req.params.id;
-        const question = await questionService.getQuestionById(questionId);
-
-        if (!question) {
-            return res.status(404).json({ success: false, error: "Question not found" });
-        }
-
-        res.status(200).json({ success: true, data: question });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
-    }
+const getQuestionDetails = async (req, res) => {
+  try {
+    const question = await questionService.getQuestionWithAnswers(req.params.questionId);
+    res.json(question);
+  } catch (error) {
+    res.status(error.message === 'Question not found' ? 404 : 500)
+       .json({ error: error.message });
+  }
 };
 
 
@@ -79,7 +74,7 @@ const deleteQuestion = async (req, res) => {
 module.exports = {
     createQuestion,
     getAllQuestions,
-    getQuestion,
+    getQuestionDetails,
     updateQuestion,
     deleteQuestion,
 };

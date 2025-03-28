@@ -7,7 +7,7 @@ router.post("/", authMiddleware, questionController.createQuestion);
 
 router.get("/", questionController.getAllQuestions);
 
-router.get("/:id", questionController.getQuestion);
+router.get("/:questionId", questionController.getQuestionDetails);
 
 router.put("/:id", authMiddleware, questionController.updateQuestion);
 
