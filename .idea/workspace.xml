@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="132c3cbd-7b71-430c-b14d-a5c551a91986" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/controllers/answer.controller.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Answer.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/answer.route.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/seeders/answer.seeder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/answer.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="132c3cbd-7b71-430c-b14d-a5c551a91986" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

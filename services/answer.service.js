@@ -2,7 +2,20 @@ const Answer = require("../models/Answer.model");
 const Question = require("../models/Question.model");
 
 const createAnswer = async (answerData) => {
-  return await Answer.create(answerData);
+  const questionExists = await Question.exists({ _id: answerData.question });
+  if (!questionExists) {
+    throw new Error('Question not found');
+  }
+
+  const answer = await Answer.create(answerData);
+
+  await Question.findByIdAndUpdate(
+    answerData.question,
+    { $push: { answers: answer._id } },
+    { new: true }
+  );
+
+  return answer;
 };
 
 const getAnswersByQuestion = async (questionId) => {

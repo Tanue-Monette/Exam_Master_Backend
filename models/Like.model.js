@@ -1,17 +1,22 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const LikeSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-    answer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Answer",
-        required: true,
-    },
-}, { timestamps: true });
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  answer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Answer',
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-const Like = mongoose.model("Like", LikeSchema);
-module.exports = Like;
+LikeSchema.index({ user: 1, answer: 1 }, { unique: true });
+
+module.exports = mongoose.model('Like', LikeSchema);

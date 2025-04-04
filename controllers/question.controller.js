@@ -1,17 +1,22 @@
 const questionService = require("../services/question.service");
 
 const createQuestion = async (req, res) => {
+    const questionData =  {title, askedBy, description, exam_type, examiner, study_field, year} = req.body;
     try {
-        const { title, year, exam_type, examiner, study_field, image } = req.body;
-        const askedBy = req.user._id;
+        const questions = await questionService.createQuestion(questionData);
 
-        const questionData = { title, year, exam_type, examiner, study_field, image, askedBy };
-        const question = await questionService.createQuestion(questionData);
+        res.status(200).json({
+          success: true,
+          count: questions.length,
+          questions
+        });
 
-        res.status(201).json({ success: true, data: question });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
-    }
+      } catch (error) {
+        res.status(500).json({
+          success: false,
+          error: error.message
+        });
+      }
 };
 
 const getAllQuestions = async (req, res) => {

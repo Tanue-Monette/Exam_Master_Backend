@@ -1,4 +1,5 @@
 const Question = require("../models/Question.model");
+const Answer = require("../models/Answer.model");
 
 const createQuestion = async (questionData) => {
     const question = new Question(questionData);
@@ -6,18 +7,47 @@ const createQuestion = async (questionData) => {
 };
 
 const getAllQuestions = async () => {
-    return await Question.find().populate("askedBy", "username email");
+     const allAnswers = await Answer.find()
+         .populate('answeredBy', 'username name')
+         .populate({
+           path: 'comments',
+           populate: {
+             path: 'user',
+             select: 'username'
+           }
+         })
+         .sort({ createdAt: -1 });
+
+       // Group answers by question ID
+       const answersByQuestion = allAnswers.reduce((acc, answer) => {
+         const questionId = answer.question.toString();
+         if (!acc[questionId]) {
+           acc[questionId] = [];
+         }
+         acc[questionId].push(answer);
+         return acc;
+       }, {});
+
+       // Get all questions and attach their answers
+       const questions = await Question.find()
+         .populate('askedBy', 'username name email')
+         .sort({ createdAt: -1 });
+
+       return questions.map(question => ({
+         ...question.toObject(),
+         answers: answersByQuestion[question._id.toString()] || []
+       }));
 };
 
 const getQuestionWithAnswers = async (questionId) => {
  const question = await Question.findById(questionId)
-     .populate('askedBy', 'username')
+     .populate('askedBy', 'name')
      .populate({
        path: 'answers',
        populate: [
          {
            path: 'answeredBy',
-           select: 'username'
+           select: 'name'
          },
          {
            path: 'comments',
