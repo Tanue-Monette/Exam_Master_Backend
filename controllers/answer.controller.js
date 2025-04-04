@@ -2,19 +2,32 @@ const answerService = require("../services/answer.service");
 
 exports.createAnswer = async (req, res) => {
   try {
-    const { title, detail, question } = req.body;
+    const { title, questionId } = req.body;
     const answeredBy = req.user._id;
+
+    if (!questionId) {
+      return res.status(400).json({
+        success: false,
+        error: 'Question ID is required'
+      });
+    }
 
     const answer = await answerService.createAnswer({
       title,
-      detail,
       answeredBy,
-      question
+      question: questionId
     });
 
-    res.status(201).json({ success: true, data: answer });
+    res.status(201).json({
+      success: true,
+      data: answer
+    });
   } catch (error) {
-    res.status(400).json({ success: false, error: error.message });
+    const statusCode = error.message === 'Question not found' ? 404 : 400;
+    res.status(statusCode).json({
+      success: false,
+      error: error.message
+    });
   }
 };
 

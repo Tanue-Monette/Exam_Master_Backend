@@ -1,21 +1,29 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const CommentSchema = new mongoose.Schema({
-    text: {
-        type: String,
-        required: [true, "Comment text is required"],
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-    },
-    answer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Answer",
-        required: true,
-    },
-}, { timestamps: true });
+  content: {
+    type: String,
+    required: [true, 'Comment content is required'],
+    maxlength: [500, 'Comment cannot exceed 500 characters']
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  answer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Answer',
+    required: true
+  },
+  replies: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-const Comment = mongoose.model("Comment", CommentSchema);
-module.exports = Comment;
+module.exports = mongoose.model('Comment', CommentSchema);

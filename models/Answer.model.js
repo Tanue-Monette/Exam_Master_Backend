@@ -5,10 +5,6 @@ const AnswerSchema = new mongoose.Schema({
         type: String,
         required: [true, "Title is required"],
     },
-    detail: {
-        type: String,
-        required: [true, "Details can't be empty"],
-    },
     answeredBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -19,15 +15,23 @@ const AnswerSchema = new mongoose.Schema({
         ref: "Question",
         required: [true, "Question ID is required"],
     },
-    likes: [{
+      likes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Like",
-    }],
-    comments: [{
+        ref: 'Like'
+      }],
+      comments: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
-    }],
-}, { timestamps: true });
+        ref: 'Comment'
+      }],
+      shareCount: {
+        type: Number,
+        default: 0
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now
+      }
+});
 
 const Answer = mongoose.model("Answer", AnswerSchema);
 module.exports = Answer;

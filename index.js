@@ -4,6 +4,7 @@ const cors = require('cors');
 const userRoute = require('./routes/user.route.js');
 const questionRoutes = require("./routes/question.route");
 const answerRoutes = require("./routes/answer.route");
+const interactionRoutes = require("./routes/answerInteractions.route");
 const authMiddleware = require("./middlewares/authMiddleware");
 const connectDB = require("./db");
 
@@ -28,6 +29,7 @@ app.listen(3000, () =>{
 
 app.use(express.json());
 
+app.use('/api/answers', interactionRoutes);
 app.use("/api/answers", answerRoutes);
 app.use('/api/users', userRoute);
 app.use("/api/questions", questionRoutes);

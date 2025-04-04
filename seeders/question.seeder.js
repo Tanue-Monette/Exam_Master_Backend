@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Question = require("../models/question.model");
+const User require("../models/user.model");
 const { faker } = require("@faker-js/faker");
 const connectDB = require("../db");
 
@@ -24,7 +25,10 @@ const seedQuestions = async () => {
                 examiner: faker.person.fullName(),
                 study_field: faker.helpers.arrayElement(["Mathematics", "Physics", "Chemistry", "Biology"]),
                 image: faker.image.url(),
-                askedBy: new mongoose.Types.ObjectId(),
+                askedBy: {
+                  _id: new mongoose.Types.ObjectId(),
+                  name: faker.person.fullName(),
+                }
             });
             questions.push(question);
         }
