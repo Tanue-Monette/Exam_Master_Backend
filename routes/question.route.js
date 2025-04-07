@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const questionController = require("../controllers/question.controller");
 const authMiddleware = require("../middlewares/authMiddleware");
+const upload = require("../middlewares/multerConfig");
 
-router.post("/", authMiddleware, questionController.createQuestion);
+router.post("/", authMiddleware, upload.single('file'), questionController.createQuestion);
 
 router.get("/", questionController.getAllQuestions);
 

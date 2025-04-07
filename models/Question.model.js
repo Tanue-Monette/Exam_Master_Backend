@@ -19,15 +19,19 @@ const QuestionSchema = new mongoose.Schema(
       enum: ["First semester", "Second semester", "CA", "Resit"],
       required: true
     },
-    examiner: {
-      type: String,
-      required: [true, "Examiner is required"]
-    },
+      examiner: {
+          type: String,
+          required: [true, "Examiner is required"]
+      },
+      course: {
+          type: String,
+          required: [true, "Course is required"]
+      },
     study_field: {
       type: String,
       required: [true, "Field of study is required"]
     },
-    image: {
+    file: {
       type: String,
       required: false
     },

@@ -1,8 +1,30 @@
 const questionService = require("../services/question.service");
 
 const createQuestion = async (req, res) => {
-    const questionData =  {title, askedBy, description, exam_type, examiner, study_field, year} = req.body;
     try {
+    const   {
+        title,
+        askedBy,
+        description,
+        exam_type,
+        examiner,
+        study_field,
+        year,
+        course,
+    } = req.body;
+
+        const file = req.file ? req.file.path : null;
+        const questionData = {
+            title,
+            askedBy,
+            description,
+            exam_type,
+            examiner,
+            study_field,
+            year,
+            course,
+            file
+        };
         const questions = await questionService.createQuestion(questionData);
 
         res.status(200).json({
@@ -12,6 +34,19 @@ const createQuestion = async (req, res) => {
         });
 
       } catch (error) {
+        if (error.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({
+                success: false,
+                error: 'File size too large. Maximum 5MB allowed.'
+            });
+        }
+        if (error.message.includes('Invalid file type')) {
+            return res.status(400).json({
+                success: false,
+                error: error.message
+            });
+        }
+
         res.status(500).json({
           success: false,
           error: error.message

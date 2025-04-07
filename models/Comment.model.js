@@ -16,10 +16,6 @@ const CommentSchema = new mongoose.Schema({
     ref: 'Answer',
     required: true
   },
-  replies: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Comment'
-  }],
   createdAt: {
     type: Date,
     default: Date.now

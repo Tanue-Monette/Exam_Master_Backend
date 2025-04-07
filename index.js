@@ -7,10 +7,14 @@ const answerRoutes = require("./routes/answer.route");
 const interactionRoutes = require("./routes/answerInteractions.route");
 const authMiddleware = require("./middlewares/authMiddleware");
 const connectDB = require("./db");
+const path = require('path');
 
 const app = express();
 
 connectDB();
+
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const corsOption = {
     origin: "*",

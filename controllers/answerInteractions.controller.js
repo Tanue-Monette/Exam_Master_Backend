@@ -47,6 +47,7 @@ exports.shareAnswer = async (req, res) => {
 exports.getAnswerInteractions = async (req, res) => {
   try {
     const answer = await interactionService.getAnswerInteractions(req.params.answerId);
+    console.log("comments: ", answer)
     res.json(answer);
   } catch (error) {
     res.status(500).json({ error: error.message });

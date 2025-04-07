@@ -21,7 +21,7 @@ exports.unlikeAnswer = async (userId, answerId) => {
 };
 
 exports.addComment = async (userId, answerId, content) => {
-  const comment = await Comment.create({ author: userId, answer: answerId, content });
+  const comment = await Comment.create({ user: userId, answer: answerId, content });
   await Answer.findByIdAndUpdate(answerId, { $push: { comments: comment._id } });
   return comment;
 };
@@ -37,6 +37,6 @@ exports.getAnswerInteractions = async (answerId) => {
     .populate('likes', 'user createdAt')
     .populate({
       path: 'comments',
-      populate: { path: 'author', select: 'username avatar' }
+      populate: { path: 'user', select: 'name image' }
     });
 };
