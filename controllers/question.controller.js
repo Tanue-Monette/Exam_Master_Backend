@@ -97,10 +97,15 @@ const updateQuestion = async (req, res) => {
 const deleteQuestion = async (req, res) => {
     try {
         const questionId = req.params.id;
-
+        const userId = req.user._id;
+        const userRole = req.user.role;
 
         const question = await questionService.getQuestionById(questionId);
-        if (question.askedBy._id.toString() !== req.user._id.toString()) {
+
+        if (
+            question.askedBy._id.toString() !== userId.toString() &&
+            userRole !== 'admin'
+        ) {
             return res.status(403).json({ success: false, error: "Unauthorized" });
         }
 
@@ -110,6 +115,7 @@ const deleteQuestion = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 };
+
 
 module.exports = {
     createQuestion,

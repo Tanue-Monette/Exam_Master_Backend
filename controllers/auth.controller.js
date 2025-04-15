@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const register = async(req, res) => {
   try {
-      const { name, email, password } = req.body;
+      const { name, email, password, role } = req.body;
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
@@ -34,6 +34,7 @@ const register = async(req, res) => {
       const user = await User.create({
         name,
         email,
+        role,
         password: hashedPassword,
         image: imageUrl,
       });
@@ -69,4 +70,17 @@ const login = async(req, res) => {
     }
 }
 
-module.exports = { register, login };
+const getUser = async(req, res) => {
+    try{
+        const user = await User.find();
+        if (user) {
+            return res.status(200).json(user);
+        }
+
+    }catch(err){
+        console.error("Error during getUser:", err);
+        res.status(500).json({ message: err.message });
+    }
+}
+
+module.exports = { register, login, getUser };
